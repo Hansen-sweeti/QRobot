@@ -10,6 +10,7 @@ import love.forte.simbot.api.message.containers.GroupAccountInfo;
 import love.forte.simbot.api.message.containers.GroupInfo;
 import love.forte.simbot.api.message.events.GroupMsg;
 import love.forte.simbot.api.sender.Sender;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
@@ -29,6 +30,7 @@ public class MyGroupListen {
 
     private Robot robot;
 
+    @Autowired
     RedisTemplate redisTemplate;
 
     MyGroupSend myGroupSend;
@@ -68,8 +70,6 @@ public class MyGroupListen {
         log.info("Group: [ {} ]({}) 成员：{}({}) ：{}",groupInfo.getGroupName(),groupInfo.getGroupCode(),accountInfo.getAccountNickname(),accountInfo.getAccountCode(),groupMsg.getMsgContent().getMsg());
         //System.out.println(groupMsg.getText());
         String str=groupMsg.getText();
-        System.out.println(groupMsg.getId());
-        System.out.println(str);
         int end=str.indexOf(" ");
         String util;
         String param = null;
@@ -77,12 +77,10 @@ public class MyGroupListen {
             util=str;
         }else{
             util=str.substring(0,end);
-            param=str.substring(end+1,str.length());
+
+            param=str.substring(end+1,str.length()).trim();
         }
-        System.out.println(util);
-        System.out.println(param);
-        System.out.println(myGroupSend);
-        //myGroupSend.sendMsg(util,groupMsg,sender);
+        //redisTemplate.opsForValue().set("Qq:"+groupInfo.getGroupCode(),groupInfo.getGroupName());
         if(groupMsg.getMsgContent().getMsg().equals("/功能")){
             sender.sendGroupMsg(groupInfo.getGroupCode(), Messages.utils());
         }else if(Robot.getInstance().hashSet.contains(util)){
