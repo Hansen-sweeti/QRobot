@@ -17,5 +17,4 @@ public class RespBeanWeather {
     private String code;
     private String msg;
     private WeatherData data;
-
 }
