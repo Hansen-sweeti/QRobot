@@ -2,7 +2,7 @@ package com.dorby.qrobot.service;
 
 import com.alibaba.fastjson.JSON;
 import com.dorby.qrobot.utils.JsonUtil;
-import com.dorby.qrobot.vo.data.RespBeanTranslate;
+import com.dorby.qrobot.vo.RespBeanTranslate;
 
 import java.io.BufferedReader;
 import java.io.IOException;
